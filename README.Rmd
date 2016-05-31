@@ -4,22 +4,41 @@ output:
   html_document:
     keep_md: yes
     highlight: tango
-    toc: true
-    toc_float: true
 author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
+
+### Files
+
+All data files created from raw data in `ignore` folder using `R\dat_proc.R`
+
+`dum.RData` Dumbarton time series data from `Dumbarton_07022013_04282016_L1.csv`
+
+`dum_evalcor.RData` ggplot of tidal/sun correlations at Dumbarton
+
+`new.RData` Newark time series data from `Newark_04212015_05132016_L1 (1).csv`
+
+`new_evalcor.RData` ggplot of tidal/sun correlations at Newark
 
 ```{r echo = F, message = F, cache = F}
 library(SWMPr)
 library(dplyr)
 library(tidyr)
-# library(WtRegDO)
-devtools::load_all('M:/docs/SWMP/WtRegDO')
+library(WtRegDO)
 source('R/funcs.R')
 ```
 
-### DO time series from southern SF Bay
+### Correlation between sun angle and tidal change at each site
 
-```{r echo = F, message = F}
+Dumbarton
 
+```{r echo = F, message = F, fig.height = 3, fig.width = 8}
+data(dum_evalcor)
+dum_evalcor + scale_y_continuous(limits = c(-0.4, 0.4))
+```
+
+Newark
+
+```{r echo = F, message = F, fig.height = 3, fig.width = 8}
+data(new_evalcor)
+new_evalcor + scale_y_continuous(limits = c(-0.4, 0.4))
 ```
